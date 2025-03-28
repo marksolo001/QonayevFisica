@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Динамика - Физика порталы</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="./физика.webp">
+    <style>
+        .theory-card {
+            transition: transform 0.3s;
+            border-radius: 10px;
+        }
+        .theory-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .formula-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #0d6efd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .law-card {
+            border-left: 5px solid #0d6efd;
+        }
+        .law-card h5 i {
+            color: #0d6efd;
+        }
+        .force-diagram {
+            background-color: #f0f8ff;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        #animationCanvas {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        .nav-pills .nav-link.active {
+            background-color: #0d6efd;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-atom me-2"></i>Физика порталы
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="kinematics.html">Кинематика</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Динамика</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Статика</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center language-switcher text-white">
+                    <i class="fas fa-language me-2"></i>
+                    <span id="languageText">Қаз</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <!-- Кіріспе -->
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 mb-3">Динамика</h1>
+                <p class="lead">Денелердің қозғалыс себептерін зерттейтін физика саласы</p>
+                <div class="d-flex justify-content-center gap-3 mt-4">
+                    <a href="#theory" class="btn btn-primary btn-lg">
+                        <i class="fas fa-book me-2"></i>Теория
+                    </a>
+                    <a href="#practice" class="btn btn-success btn-lg">
+                        <i class="fas fa-tasks me-2"></i>Есептер
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Теория бөлімі -->
+        <section id="theory" class="mb-5">
+            <h2 class="text-center mb-4"><i class="fas fa-book-open me-2"></i>Негізгі ұғымдар</h2>
+            
+            <!-- Ньютон заңдары -->
+            <div class="card mb-4 border-0 shadow theory-card">
+                <div class="card-header bg-primary text-white">
+                    <h3><i class="fas fa-balance-scale me-2"></i>Ньютон заңдары</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- 1-заң -->
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 law-card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-1 me-2"></i>Инерция заңы</h5>
+                                    <p class="card-text">Егер денеге басқа денелер әсер етпесе, онда дене тыныштық күйінде немесе түзусызықты бірқалыпты қозғалыста болады.</p>
+                                    <div class="formula-box">
+                                        <code>∑F = 0 ⇒ a = 0</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 2-заң -->
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 law-card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-2 me-2"></i>Динамиканың негізгі заңы</h5>
+                                    <p class="card-text">Дененің үдеуі оған әсер ететін күшке тура пропорционал және дененің массасына кері пропорционал.</p>
+                                    <div class="formula-box">
+                                        <code>F = m·a</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 3-заң -->
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 law-card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-3 me-2"></i>Әсер және қарсы әсер заңы</h5>
+                                    <p class="card-text">Екі дене бір-біріне шамалары бірдей, бағыттары қарама-қарсы күштермен әсер етеді.</p>
+                                    <div class="formula-box">
+                                        <code>F₁₂ = -F₂₁</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Күштер түрлері -->
+            <div class="card mb-4 border-0 shadow theory-card">
+                <div class="card-header bg-success text-white">
+                    <h3><i class="fas fa-bolt me-2"></i>Күштер түрлері</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Ауырлық күші -->
+                        <div class="col-md-4 mb-4">
+                            <div class="text-center p-3 h-100">
+                                <div class="bg-light p-4 rounded-circle d-inline-block mb-3">
+                                    <i class="fas fa-weight fa-3x text-danger"></i>
+                                </div>
+                                <h5>Ауырлық күші</h5>
+                                <p>Жердің тартылыс күші</p>
+                                <div class="formula-box text-start">
+                                    <code>F = m·g</code>
+                                    <p class="small text-muted mb-0">g = 9.8 м/с² - еркін түсу үдеуі</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Серпімділік күші -->
+                        <div class="col-md-4 mb-4">
+                            <div class="text-center p-3 h-100">
+                                <div class="bg-light p-4 rounded-circle d-inline-block mb-3">
+                                    <i class="fas fa-expand fa-3x text-warning"></i>
+                                </div>
+                                <h5>Серпімділік күші</h5>
+                                <p>Деформацияланған дененің қалпына келу күші</p>
+                                <div class="formula-box text-start">
+                                    <code>F = -k·x</code>
+                                    <p class="small text-muted mb-0">k - қаттылық коэффициенті, x - ұзару</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Үйкеліс күші -->
+                        <div class="col-md-4 mb-4">
+                            <div class="text-center p-3 h-100">
+                                <div class="bg-light p-4 rounded-circle d-inline-block mb-3">
+                                    <i class="fas fa-hand-paper fa-3x text-info"></i>
+                                </div>
+                                <h5>Үйкеліс күші</h5>
+                                <p>Қозғалысқа қарсы бағытталған күш</p>
+                                <div class="formula-box text-start">
+                                    <code>F = μ·N</code>
+                                    <p class="small text-muted mb-0">μ - үйкеліс коэффициенті, N - қалыпты қысым күші</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Күштер диаграммасы -->
+            <div class="card mb-4 border-0 shadow theory-card">
+                <div class="card-header bg-info text-white">
+                    <h3><i class="fas fa-project-diagram me-2"></i>Күштер диаграммасы</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="force-diagram mb-4 mb-md-0">
+                                <h5 class="text-center mb-4">Көлбеу жазықтықтағы дене</h5>
+                                <div class="text-center position-relative" style="height: 200px;">
+                                    <div class="position-absolute top-50 start-50 translate-middle">
+                                        <div style="width: 100px; height: 80px; background-color: #6c757d; border-radius: 5px; transform: rotate(15deg);"></div>
+                                        <div style="position: absolute; top: 40px; left: 50px; width: 80px; height: 2px; background-color: #000; transform: rotate(15deg);"></div>
+                                        <div style="position: absolute; top: 10px; left: 60px; width: 60px; height: 2px; background-color: #dc3545; transform: rotate(105deg); transform-origin: left;"></div>
+                                        <div style="position: absolute; top: 40px; left: 40px; width: 60px; height: 2px; background-color: #0d6efd; transform: rotate(15deg);"></div>
+                                        <div style="position: absolute; top: 70px; left: 60px; width: 60px; height: 2px; background-color: #198754; transform: rotate(-75deg); transform-origin: left;"></div>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <p><span class="badge bg-danger me-2"></span>Ауырлық күші (mg)</p>
+                                    <p><span class="badge bg-primary me-2"></span>Қалыпты қысым күші (N)</p>
+                                    <p><span class="badge bg-success me-2"></span>Үйкеліс күші (F<sub>үйк</sub>)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Күштерді талдау әдісі:</h5>
+                            <ol>
+                                <li>Денеге әсер ететін барлық күштерді анықтау</li>
+                                <li>Күштерді координаталық осьтерге проекциялау</li>
+                                <li>Ньютонның екінші заңын әр оське қолдану</li>
+                                <li>Теңдеулер жүйесін шешу</li>
+                            </ol>
+                            <div class="formula-box mt-3">
+                                <h6>Көлбеу жазықтық үшін:</h6>
+                                <p>mg·sinα - F<sub>үйк</sub> = m·a</p>
+                                <p>N = mg·cosα</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Импульс пен энергия -->
+            <div class="card mb-4 border-0 shadow theory-card">
+                <div class="card-header bg-warning text-dark">
+                    <h3><i class="fas fa-fire me-2"></i>Импульс пен энергия</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Импульс -->
+                        <div class="col-md-6 mb-4 mb-md-0">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-bullseye me-2"></i>Импульс</h5>
+                                    <p class="card-text">Дененің қозғалыс мөлшері</p>
+                                    <div class="formula-box">
+                                        <code>p = m·v</code>
+                                        <p class="mt-2">Импульстің сақталу заңы:</p>
+                                        <code>∑p<sub>алдында</sub> = ∑p<sub>кейін</sub></code>
+                                    </div>
+                                    <div class="mt-3">
+                                        <p><strong>Қолданысы:</strong></p>
+                                        <ul>
+                                            <li>Соқтығысуларды зерттеу</li>
+                                            <li>Реактивті қозғалыс</li>
+                                            <li>Ракеталардың ұшуы</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Энергия -->
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-battery-full me-2"></i>Энергия</h5>
+                                    <p class="card-text">Дененің жұмыс істеу қабілеті</p>
+                                    <div class="formula-box">
+                                        <p>Кинетикалық энергия:</p>
+                                        <code>E<sub>к</sub> = (m·v²)/2</code>
+                                        <p class="mt-2">Потенциалдық энергия:</p>
+                                        <code>E<sub>п</sub> = m·g·h</code>
+                                        <p class="mt-2">Энергияның сақталу заңы:</p>
+                                        <code>E<sub>алдында</sub> = E<sub>кейін</sub></code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Практика бөлімі -->
+        <section id="practice" class="mb-5">
+            <h2 class="text-center mb-4"><i class="fas fa-tasks me-2"></i>Практикалық есептер</h2>
+            
+            <!-- 1-есеп -->
+            <div class="card mb-4 border-0 shadow">
+                <div class="card-header bg-info text-white">
+                    <h3><i class="fas fa-question-circle me-2"></i>Есеп 1: Көлбеу жазықтық</h3>
+                </div>
+                <div class="card-body">
+                    <p>Массасы 2 кг дене 30° бұрыш жасайтын көлбеу жазықтықтан сырғанап түсіп жатыр. Үйкеліс коэффициенті 0.1. Дененің үдеуін табыңыз.</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form id="dynamicsProblem1">
+                                <div class="mb-3">
+                                    <label class="form-label">Дененің массасы (m):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" value="2" readonly>
+                                        <span class="input-group-text">кг</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Көлбеу бұрышы (α):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" value="30" readonly>
+                                        <span class="input-group-text">°</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Үйкеліс коэффициенті (μ):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" value="0.1" readonly>
+                                        <span class="input-group-text">-</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Еркін түсу үдеуі (g):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" value="9.8" readonly>
+                                        <span class="input-group-text">м/с²</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Дененің үдеуі (a):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="accelerationResult" step="0.01">
+                                        <span class="input-group-text">м/с²</span>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary me-2" onclick="checkSolution(1)">
+                                    <i class="fas fa-check me-1"></i>Тексеру
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="showSolution(1)">
+                                    <i class="fas fa-lightbulb me-1"></i>Шешімді көрсету
+                                </button>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="solution-box p-3 bg-light rounded" id="solution1" style="display: none;">
+                                <h5><i class="fas fa-info-circle me-2 text-info"></i>Шешімі:</h5>
+                                <p>1. Күштерді проекциялау:</p>
+                                <p><code>mg·sinα - F<sub>үйк</sub> = m·a</code></p>
+                                <p><code>N = mg·cosα</code></p>
+                                <p>2. Үйкеліс күші: <code>F<sub>үйк</sub> = μ·N = μ·mg·cosα</code></p>
+                                <p>3. Теңдеу:</p>
+                                <p><code>mg·sinα - μ·mg·cosα = m·a</code></p>
+                                <p>4. Үдеу:</p>
+                                <p><code>a = g(sinα - μ·cosα)</code></p>
+                                <p>5. Сандарды қоямыз:</p>
+                                <p><code>a = 9.8·(sin30° - 0.1·cos30°) = 9.8·(0.5 - 0.1·0.866) ≈ 4.05 м/с²</code></p>
+                                <p class="fw-bold">Жауабы: <span class="text-success">4.05 м/с²</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2-есеп -->
+            <div class="card mb-4 border-0 shadow">
+                <div class="card-header bg-warning text-dark">
+                    <h3><i class="fas fa-question-circle me-2"></i>Есеп 2: Импульстің сақталуы</h3>
+                </div>
+                <div class="card-body">
+                    <p>Массасы 0.1 кг доп 20 м/с жылдамдықпен қозғалып, массасы 0.4 кг тыныштықтағы допқа соғылып, бірге қозғалады. Соқтығысудан кейінгі жалпы жылдамдықты табыңыз.</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form id="dynamicsProblem2">
+                                <div class="mb-3">
+                                    <label class="form-label">Бірінші доптың массасы (m₁):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" value="0.1" readonly>
+                                        <span class="input-group-text">кг</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Бірінші доптың жылдамдығы (v₁):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" value="20" readonly>
+                                        <span class="input-group-text">м/с</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Екінші доптың массасы (m₂):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" value="0.4" readonly>
+                                        <span class="input-group-text">кг</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Соқтығысудан кейінгі жылдамдық (v'):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="velocityAfterCollision" step="0.1">
+                                        <span class="input-group-text">м/с</span>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary me-2" onclick="checkSolution(2)">
+                                    <i class="fas fa-check me-1"></i>Тексеру
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="showSolution(2)">
+                                    <i class="fas fa-lightbulb me-1"></i>Шешімді көрсету
+                                </button>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="solution-box p-3 bg-light rounded" id="solution2" style="display: none;">
+                                <h5><i class="fas fa-info-circle me-2 text-warning"></i>Шешімі:</h5>
+                                <p>Импульстің сақталу заңы:</p>
+                                <p><code>m₁·v₁ + m₂·v₂ = (m₁ + m₂)·v'</code></p>
+                                <p>Екінші доп тыныштықта болғандықтан (v₂ = 0):</p>
+                                <p><code>m₁·v₁ = (m₁ + m₂)·v'</code></p>
+                                <p>Жылдамдықты табамыз:</p>
+                                <p><code>v' = (m₁·v₁)/(m₁ + m₂)</code></p>
+                                <p>Сандарды қоямыз:</p>
+                                <p><code>v' = (0.1·20)/(0.1 + 0.4) = 2/0.5 = 4 м/с</code></p>
+                                <p class="fw-bold">Жауабы: <span class="text-success">4 м/с</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Анимация бөлімі -->
+        <section class="mb-5">
+            <div class="card border-0 shadow">
+                <div class="card-header bg-dark text-white">
+                    <h3><i class="fas fa-play-circle me-2"></i>Интерактивті анимациялар</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Ньютонның екінші заңы</h5>
+                            <p>Күш пен массаның үдеуге әсерін бақылаңыз:</p>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Күш (F): <span id="forceValue">10</span> Н</label>
+                                <input type="range" class="form-range" id="forceSlider" min="1" max="20" value="10">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Масса (m): <span id="massValue">2</span> кг</label>
+                                <input type="range" class="form-range" id="massSlider" min="1" max="10" value="2">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Үдеу (a):</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="accelerationCalc" readonly>
+                                    <span class="input-group-text">м/с²</span>
+                                </div>
+                            </div>
+                            
+                            <button id="startAnimation" class="btn btn-primary">
+                                <i class="fas fa-play me-1"></i>Анимацияны бастау
+                            </button>
+                            <button id="resetAnimation" class="btn btn-outline-secondary ms-2">
+                                <i class="fas fa-redo me-1"></i>Қалпына келтіру
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <canvas id="animationCanvas" width="400" height="200"></canvas>
+                            <div class="mt-3 alert alert-info">
+                                <p><strong>Ньютонның екінші заңы:</strong></p>
+                                <p><code>a = F/m</code></p>
+                                <p class="mb-0">Үдеу күшке тура, ал массаға кері пропорционал</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Қолданыс бөлімі -->
+        <section class="mb-5">
+            <div class="card border-0 shadow">
+                <div class="card-header bg-secondary text-white">
+                    <h3><i class="fas fa-lightbulb me-2"></i>Күнделікті өмірдегі қолданысы</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="nav nav-pills mb-4" id="applicationsTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="transport-tab" data-bs-toggle="pill" data-bs-target="#transport" type="button">
+                                <i class="fas fa-car me-1"></i>Көлік
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="sports-tab" data-bs-toggle="pill" data-bs-target="#sports" type="button">
+                                <i class="fas fa-running me-1"></i>Спорт
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="space-tab" data-bs-toggle="pill" data-bs-target="#space" type="button">
+                                <i class="fas fa-rocket me-1"></i>Ғарыш
+                            </button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="applicationsTabContent">
+                        <div class="tab-pane fade show active" id="transport" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card h-100">
+                                        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Автокөлік">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Тормоз жолы</h5>
+                                            <p class="card-text">Автокөліктің тоқтау қашықтығы жылдамдықтың квадратына пропорционал. 2 есе жылдамдық - 4 есе ұзын тормоз жолы.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card h-100">
+                                        <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Поезд">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Поезд қозғалысы</h5>
+                                            <p class="card-text">Поезддің қозғалуы мен тоқтауы динамика заңдарына негізделген. Үлкен массаға әсер ету үшін үлкен күш қажет.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card h-100">
+                                        <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Ұшақ">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Ұшақ қозғалысы</h5>
+                                            <p class="card-text">Ұшақтың көтерілуі қанаттарға әсер ететін аэродинамикалық күштердің теңдігіне байланысты.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="sports" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card h-100">
+                                        <img src="https://images.unsplash.com/photo-1543351611-58f69d7c1781?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Жеңіл атлетика">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Жүгіру</h5>
+                                            <p class="card-text">Спортшының жылдамдығын арттыру үшін оның қадамының ұзындығы мен жиілігін арттыру қажет.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card h-100">
+                                        <img src="https://images.unsplash.com/photo-1519861531473-9200262188bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Жүзу">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Жүзу</h5>
+                                            <p class="card-text">Суға әсер ету күші жүзушінің алға қарай жылжуына әкеледі (Ньютонның үшінші заңы).</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card h-100">
+                                        <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Гольф">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Гольф</h5>
+                                            <p class="card-text">Доптың ұшу траекториясы соққы күшіне, соққы бұрышына және ауа кедергісіне байланысты.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="space" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card h-100">
+                                        <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?ixlib=rb-1.2.1&auto>
+ </body>
+</html>
