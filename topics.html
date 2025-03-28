@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Физика порталы | Тақырыптар</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="./физика.webp">
+</head>
+<body>
+    <!-- Навигация (index.html сияқты) -->
+
+    <main class="container mt-5 pt-4">
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <h1>Физика тақырыптары</h1>
+            <div class="dropdown">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown">
+                    <i class="fas fa-filter me-2"></i>Сынып бойынша
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" data-class="all">Барлығы</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#" data-class="7">7 сынып</a></li>
+                    <li><a class="dropdown-item" href="#" data-class="8">8 сынып</a></li>
+                    <li><a class="dropdown-item" href="#" data-class="9">9 сынып</a></li>
+                    <li><a class="dropdown-item" href="#" data-class="10">10 сынып</a></li>
+                    <li><a class="dropdown-item" href="#" data-class="11">11 сынып</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Іздеу жүйесі -->
+        <div class="row mb-4">
+            <div class="col-md-6 mx-auto">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="searchInput" placeholder="Тақырыпты іздеу...">
+                    <button class="btn btn-primary" type="button" id="searchBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Тақырыптардың кестелік көрінісі -->
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-primary">
+                    <tr>
+                        <th>№</th>
+                        <th>Тақырып атауы</th>
+                        <th>Сынып</th>
+                        <th>Қиындық деңгейі</th>
+                        <th>Әрекеттер</th>
+                    </tr>
+                </thead>
+                <tbody id="topicsTable">
+                    <!-- 7 сынып -->
+                    <tr data-class="7">
+                        <td>1</td>
+                        <td>
+                            <a href="topic-detail.html?id=1" class="text-decoration-none">
+                                <i class="fas fa-running me-2"></i>Механика негіздері
+                            </a>
+                        </td>
+                        <td>7</td>
+                        <td>
+                            <span class="badge bg-success">Оңай</span>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary ms-1">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    
+                    <!-- 8 сынып -->
+                    <tr data-class="8">
+                        <td>2</td>
+                        <td>
+                            <a href="topic-detail.html?id=2" class="text-decoration-none">
+                                <i class="fas fa-fire me-2"></i>Жылу құбылыстары
+                            </a>
+                        </td>
+                        <td>8</td>
+                        <td>
+                            <span class="badge bg-warning text-dark">Орташа</span>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary ms-1">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    
+                    <!-- 9 сынып -->
+                    <tr data-class="9">
+                        <td>3</td>
+                        <td>
+                            <a href="topic-detail.html?id=3" class="text-decoration-none">
+                                <i class="fas fa-atom me-2"></i>Атом физикасы
+                            </a>
+                        </td>
+                        <td>9</td>
+                        <td>
+                            <span class="badge bg-danger">Қиын</span>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary ms-1">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    
+                    <!-- Қосымша тақырыптар... -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Бөлімдер бойынша тақырыптар -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h2 class="mb-4">Бөлімдер бойынша тақырыптар</h2>
+                <div class="accordion" id="topicsAccordion">
+                    <!-- Механика -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMechanics">
+                                <i class="fas fa-cogs me-2"></i>Механика
+                            </button>
+                        </h2>
+                        <div id="collapseMechanics" class="accordion-collapse collapse show" data-bs-parent="#topicsAccordion">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Кинематика</h5>
+                                                <p class="card-text">Денелердің қозғалысын зерттеу</p>
+                                                <a href="./kinematica.html" class="btn btn-sm btn-primary">Ашу</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Динамика</h5>
+                                                <p class="card-text">Күштер мен қозғалыстың себептері</p>
+                                                <a href="./dinamica.html" class="btn btn-sm btn-primary">Ашу</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Статика</h5>
+                                                <p class="card-text">Тепе-теңдік жағдайындағы денелер</p>
+                                                <a href="" class="btn btn-sm btn-primary">Ашу</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Электрдинамика -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseElectrodynamics">
+                                <i class="fas fa-bolt me-2"></i>Электрдинамика
+                            </button>
+                        </h2>
+                        <div id="collapseElectrodynamics" class="accordion-collapse collapse" data-bs-parent="#topicsAccordion">
+                            <div class="accordion-body">
+                                <!-- Электрдинамика тақырыптары -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Қосымша бөлімдер... -->
+                     <!-- Тақырыптар бөліміндегі қосымша карточкалар -->
+<div class="row g-4">
+    <!-- 10 сынып - Электродинамика -->
+    <div class="col-lg-4 col-md-6">
+        <div class="card h-100 topic-card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">10 сынып</h3>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <a href="topic-detail.html?id=11" class="text-decoration-none">
+                            <i class="fas fa-bolt me-2"></i>Токтың тұрақты және айнымалы түрі
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="topic-detail.html?id=12" class="text-decoration-none">
+                            <i class="fas fa-magnet me-2"></i>Электромагниттік индукция
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="topic-detail.html?id=13" class="text-decoration-none">
+                            <i class="fas fa-atom me-2"></i>Жарықтың толқындық қасиеттері
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 11 сынып - Қазіргі физика -->
+    <div class="col-lg-4 col-md-6">
+        <div class="card h-100 topic-card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">11 сынып</h3>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <a href="topic-detail.html?id=14" class="text-decoration-none">
+                            <i class="fas fa-atom me-2"></i>Атом физикасы
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="topic-detail.html?id=15" class="text-decoration-none">
+                            <i class="fas fa-radiation me-2"></i>Ядролық физика
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="topic-detail.html?id=16" class="text-decoration-none">
+                            <i class="fas fa-rocket me-2"></i>Ғарыш физикасы
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЕНТ дайындық -->
+    <div class="col-lg-4 col-md-6">
+        <div class="card h-100 topic-card">
+            <div class="card-header bg-warning text-dark">
+                <h3 class="mb-0">ЕНТ дайындық</h3>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <a href="topic-detail.html?id=17" class="text-decoration-none">
+                            <i class="fas fa-brain me-2"></i>Механика бойынша тесттер
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="topic-detail.html?id=18" class="text-decoration-none">
+                            <i class="fas fa-fire me-2"></i>Молекулалық физика тесттері
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="topic-detail.html?id=19" class="text-decoration-none">
+                            <i class="fas fa-charging-station me-2"></i>Электродинамика тесттері
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Футер (index.html сияқты) -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Сынып бойынша сүзгі
+        document.querySelectorAll('.dropdown-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const selectedClass = this.getAttribute('data-class');
+                const rows = document.querySelectorAll('#topicsTable tr');
+                
+                rows.forEach(row => {
+                    if (selectedClass === 'all' || row.getAttribute('data-class') === selectedClass) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+                
+                document.getElementById('filterDropdown').textContent = 
+                    selectedClass === 'all' ? 'Барлығы' : `${selectedClass} сынып`;
+            });
+        });
+        
+        // Іздеу жүйесі
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const rows = document.querySelectorAll('#topicsTable tr');
+            
+            rows.forEach(row => {
+                const topicName = row.querySelector('a').textContent.toLowerCase();
+                if (topicName.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+        
+        // Enter пернесімен іздеу
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('searchBtn').click();
+            }
+        });
+    </script>
+</body>
+</html>

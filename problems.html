@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Физика порталы | Физикалық есептер</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="./физика.webp">
+    <style>
+        .problem-card {
+            border-left: 4px solid #1e3c72;
+            transition: all 0.3s;
+        }
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .difficulty-easy { color: #28a745; }
+        .difficulty-medium { color: #fd7e14; }
+        .difficulty-hard { color: #dc3545; }
+        .solution {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .solution.show {
+            max-height: 1000px;
+        }
+        .formula {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 10px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация (index.html сияқты) -->
+
+    <main class="container mt-5 pt-4">
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <h1>Физикалық есептер</h1>
+            <div class="dropdown">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown">
+                    <i class="fas fa-filter me-2"></i>Сынып бойынша
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" data-class="all">Барлығы</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#" data-class="7">7 сынып</a></li>
+                    <li><a class="dropdown-item" href="#" data-class="8">8 сынып</a></li>
+                    <li><a class="dropdown-item" href="#" data-class="9">9 сынып</a></li>
+                    <li><a class="dropdown-item" href="#" data-class="10">10 сынып</a></li>
+                    <li><a class="dropdown-item" href="#" data-class="11">11 сынып</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Фильтрлер -->
+        <div class="mb-4">
+            <div class="btn-group flex-wrap" role="group">
+                <button type="button" class="btn btn-outline-primary filter-btn active" data-filter="all">Барлығы</button>
+                <button type="button" class="btn btn-outline-primary filter-btn" data-filter="kinematics">Кинематика</button>
+                <button type="button" class="btn btn-outline-primary filter-btn" data-filter="dynamics">Динамика</button>
+                <button type="button" class="btn btn-outline-primary filter-btn" data-filter="thermodynamics">Термодинамика</button>
+                <button type="button" class="btn btn-outline-primary filter-btn" data-filter="electricity">Электродинамика</button>
+            </div>
+        </div>
+
+        <!-- Есептер тізімі -->
+        <div class="row g-4" id="problemsList">
+            <!-- 7 сынып - Кинематика -->
+            <div class="col-lg-6 problem-item" data-class="7" data-category="kinematics">
+                <div class="card h-100 problem-card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="card-title">Дененің жылдамдығын есептеу</h5>
+                            <span class="badge bg-primary">7 сынып</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge bg-light text-dark"><i class="fas fa-stopwatch me-1"></i>Орташа</span>
+                            <span class="text-muted"><i class="far fa-star me-1"></i>4.5 (12 пікір)</span>
+                        </div>
+                        <p class="card-text">
+                            Дене 100 метр жолды 20 секундта жүріп өтті. Дененің орташа жылдамдығын табыңыз.
+                        </p>
+                        <div class="formula mb-3">
+                            v = s / t
+                        </div>
+                        <button class="btn btn-outline-primary btn-sm show-solution">Шешімді көрсету</button>
+                        <div class="solution mt-3">
+                            <h6>Шешімі:</h6>
+                            <p>Берілгені:<br>
+                            s = 100 м<br>
+                            t = 20 с</p>
+                            <p>Формула:<br>
+                            v = s / t</p>
+                            <p>Есептеу:<br>
+                            v = 100 м / 20 с = 5 м/с</p>
+                            <p>Жауабы: 5 м/с</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8 сынып - Термодинамика -->
+            <div class="col-lg-6 problem-item" data-class="8" data-category="thermodynamics">
+                <div class="card h-100 problem-card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="card-title">Жылу мөлшерін есептеу</h5>
+                            <span class="badge bg-primary">8 сынып</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge bg-light text-dark"><i class="fas fa-stopwatch me-1"></i>Оңай</span>
+                            <span class="text-muted"><i class="far fa-star me-1"></i>4.2 (8 пікір)</span>
+                        </div>
+                        <p class="card-text">
+                            2 кг суды 20°C-тан 50°C-қа дейін қыздыру үшін қанша жылу мөлшері қажет?
+                        </p>
+                        <div class="formula mb-3">
+                            Q = c * m * Δt
+                        </div>
+                        <button class="btn btn-outline-primary btn-sm show-solution">Шешімді көрсету</button>
+                        <div class="solution mt-3">
+                            <h6>Шешімі:</h6>
+                            <p>Берілгені:<br>
+                            m = 2 кг<br>
+                            t₁ = 20°C<br>
+                            t₂ = 50°C<br>
+                            c = 4200 Дж/(кг·°C)</p>
+                            <p>Формула:<br>
+                            Q = c * m * (t₂ - t₁)</p>
+                            <p>Есептеу:<br>
+                            Q = 4200 * 2 * (50 - 20) = 4200 * 2 * 30 = 252000 Дж = 252 кДж</p>
+                            <p>Жауабы: 252 кДж</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Қосымша есептер... -->
+        </div>
+
+        <!-- Есептерді іздеу -->
+        <div class="row mt-5">
+            <div class="col-md-6 mx-auto">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-center mb-4">Есеп іздеу</h5>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Есептің тақырыбы немесе мазмұны">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-outline-primary me-2">Кездейсоқ есеп</button>
+                            <button class="btn btn-outline-primary">Өз есепіңізді қосу</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Футер (index.html сияқты) -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Фильтрлерді басқару
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                const problems = document.querySelectorAll('.problem-item');
+                
+                problems.forEach(problem => {
+                    if (filter === 'all' || problem.getAttribute('data-category') === filter) {
+                        problem.style.display = 'block';
+                    } else {
+                        problem.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Сынып бойынша фильтр
+        document.querySelectorAll('.dropdown-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const selectedClass = this.getAttribute('data-class');
+                const problems = document.querySelectorAll('.problem-item');
+                
+                problems.forEach(problem => {
+                    if (selectedClass === 'all' || problem.getAttribute('data-class') === selectedClass) {
+                        problem.style.display = 'block';
+                    } else {
+                        problem.style.display = 'none';
+                    }
+                });
+                
+                document.getElementById('filterDropdown').textContent = 
+                    selectedClass === 'all' ? 'Барлығы' : `${selectedClass} сынып`;
+            });
+        });
+
+        // Шешімді көрсету/жасыру
+        document.querySelectorAll('.show-solution').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const solution = this.nextElementSibling;
+                solution.classList.toggle('show');
+                
+                if (solution.classList.contains('show')) {
+                    this.textContent = 'Шешімді жасыру';
+                } else {
+                    this.textContent = 'Шешімді көрсету';
+                }
+            });
+        });
+
+        // Кездейсоқ есепті ашу
+        document.querySelector('.btn-outline-primary').addEventListener('click', function() {
+            const problems = document.querySelectorAll('.problem-item');
+            const randomIndex = Math.floor(Math.random() * problems.length);
+            problems[randomIndex].scrollIntoView({ behavior: 'smooth' });
+            
+            // Жарқыл эффектісі
+            problems[randomIndex].style.transition = 'none';
+            problems[randomIndex].style.boxShadow = '0 0 20px rgba(30, 60, 114, 0.7)';
+            setTimeout(() => {
+                problems[randomIndex].style.transition = 'all 0.3s';
+                problems[randomIndex].style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

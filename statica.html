@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Статика - Физика порталы</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="./физика.webp">
+
+    <style>
+        .theory-card {
+            transition: transform 0.3s;
+            border-radius: 10px;
+        }
+        .theory-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .formula-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #0d6efd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .equilibrium-card {
+            border-left: 5px solid #198754;
+        }
+        .moment-card {
+            border-left: 5px solid #6f42c1;
+        }
+        .center-of-mass-card {
+            border-left: 5px solid #fd7e14;
+        }
+        #beamCanvas {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        .nav-pills .nav-link.active {
+            background-color: #6f42c1;
+        }
+        .support-type {
+            cursor: pointer;
+        }
+        .support-type.active {
+            background-color: #e2e3e5;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-atom me-2"></i>Физика порталы
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="kinematics.html">Кинематика</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dynamics.html">Динамика</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Статика</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center language-switcher text-white">
+                    <i class="fas fa-language me-2"></i>
+                    <span id="languageText">Қаз</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <!-- Кіріспе -->
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 mb-3">Статика</h1>
+                <p class="lead">Денелердің тепе-теңдік жағдайын зерттейтін физика саласы</p>
+                <div class="d-flex justify-content-center gap-3 mt-4">
+                    <a href="#theory" class="btn btn-primary btn-lg">
+                        <i class="fas fa-book me-2"></i>Теория
+                    </a>
+                    <a href="#practice" class="btn btn-success btn-lg">
+                        <i class="fas fa-tasks me-2"></i>Есептер
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Теория бөлімі -->
+        <section id="theory" class="mb-5">
+            <h2 class="text-center mb-4"><i class="fas fa-book-open me-2"></i>Негізгі ұғымдар</h2>
+            
+            <!-- Тепе-теңдік шарттары -->
+            <div class="card mb-4 border-0 shadow theory-card">
+                <div class="card-header bg-success text-white">
+                    <h3><i class="fas fa-balance-scale me-2"></i>Тепе-теңдік шарттары</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- 1-шарт -->
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100 equilibrium-card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-arrows-alt-h me-2"></i>Күштер тепе-теңдігі</h5>
+                                    <p class="card-text">Денеге әсер ететін барлық күштердің векторлық қосындысы нөлге тең болуы керек:</p>
+                                    <div class="formula-box text-center">
+                                        <code>∑F = 0</code>
+                                    </div>
+                                    <div class="mt-3">
+                                        <p>Бұл шарт дене трансляциялық қозғалыс жасамайтынын білдіреді.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 2-шарт -->
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100 equilibrium-card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-sync-alt me-2"></i>Моменттер тепе-теңдігі</h5>
+                                    <p class="card-text">Денеге әсер ететін барлық күштер моменттерінің қосындысы нөлге тең болуы керек:</p>
+                                    <div class="formula-box text-center">
+                                        <code>∑M = 0</code>
+                                    </div>
+                                    <div class="mt-3">
+                                        <p>Бұл дене айналымдық қозғалыс жасамайтынын білдіреді.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert alert-info mt-3">
+                        <p class="mb-0"><strong>Ескерту:</strong> Егер денеге тек екі күш әсер етсе, онда олар бір түзудің бойында, шамалары бірдей, бағыттары қарама-қарсы болуы керек.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Күш моменті -->
+            <div class="card mb-4 border-0 shadow theory-card">
+                <div class="card-header bg-purple text-white" style="background-color: #6f42c1;">
+                    <h3><i class="fas fa-torii-gate me-2"></i>Күш моменті</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card h-100 moment-card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-ruler-combined me-2"></i>Анықтамасы</h5>
+                                    <p class="card-text">Күш моменті - күштің денені айналдыру әсерін сипаттайтын шама.</p>
+                                    <div class="formula-box text-center">
+                                        <code>M = F·d·sinα</code>
+                                    </div>
+                                    <div class="mt-3">
+                                        <p>Қайда:</p>
+                                        <ul>
+                                            <li><strong>F</strong> - күш шамасы</li>
+                                            <li><strong>d</strong> - айналу осінен күш түсірілген нүктеге дейінгі қашықтық</li>
+                                            <li><strong>α</strong> - күш векторы мен қол арасындағы бұрыш</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 moment-card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-clock me-2"></i>Моменттің бағыты</h5>
+                                    <p class="card-text">Момент векторы оң және теріс бағытта болуы мүмкін:</p>
+                                    <div class="text-center mb-3">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Torque_animation.gif/220px-Torque_animation.gif" alt="Момент анимациясы" class="img-fluid rounded">
+                                    </div>
+                                    <ul>
+                                        <li><strong>Оң момент</strong> - сағат тіліне қарсы айналу</li>
+                                        <li><strong>Теріс момент</strong> - сағат тілі бағытында айналу</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Массалар центрі -->
+            <div class="card mb-4 border-0 shadow theory-card">
+                <div class="card-header bg-orange text-white" style="background-color: #fd7e14;">
+                    <h3><i class="fas fa-bullseye me-2"></i>Массалар центрі</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card h-100 center-of-mass-card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-crosshairs me-2"></i>Анықтамасы</h5>
+                                    <p class="card-text">Массалар центрі - денедегі барлық материалдық нүктелердің массаларының орталық нүктесі.</p>
+                                    <div class="formula-box">
+                                        <p>Дискретті жүйе үшін:</p>
+                                        <code>
+                                            x<sub>ц.м.</sub> = (∑m<sub>i</sub>x<sub>i</sub>)/∑m<sub>i</sub><br>
+                                            y<sub>ц.м.</sub> = (∑m<sub>i</sub>y<sub>i</sub>)/∑m<sub>i</sub>
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 center-of-mass-card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-balance-scale-left me-2"></i>Қолданысы</h5>
+                                    <p class="card-text">Массалар центрі дене тепе-теңдігін анықтауда маңызды рөл атқарады:</p>
+                                    <ul>
+                                        <li>Егер массалар центрі тіреу ауданында болса, дене тепе-теңдікте болады</li>
+                                        <li>Егер массалар центрі тіреу ауданынан тыс жерге ауысса, дене құлайды</li>
+                                    </ul>
+                                    <div class="alert alert-warning mt-3">
+                                        <p class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i>Құрылыстағы крандардың тұрақтылығы массалар центрінің орналасуына тікелей байланысты!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Арқалықтар мен тіректер -->
+            <div class="card mb-4 border-0 shadow theory-card">
+                <div class="card-header bg-dark text-white">
+                    <h3><i class="fas fa-bridge me-2"></i>Арқалықтар мен тіректер</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Тірек түрлері</h5>
+                            <div class="row mt-3">
+                                <div class="col-6 mb-3">
+                                    <div class="card support-type" onclick="selectSupport(1)">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-grip-lines-vertical fa-3x mb-2"></i>
+                                            <h6>Қозғалмалы тірек</h6>
+                                            <p class="small text-muted mb-0">Тік реакция күші ғана</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="card support-type" onclick="selectSupport(2)">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-anchor fa-3x mb-2"></i>
+                                            <h6>Бекітілген тірек</h6>
+                                            <p class="small text-muted mb-0">Тік және көлденең реакциялар, момент</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="card support-type" onclick="selectSupport(3)">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-link fa-3x mb-2"></i>
+                                            <h6>Иілгіш байланыс</h6>
+                                            <p class="small text-muted mb-0">Керілу күші ғана</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="card support-type" onclick="selectSupport(4)">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-expand-alt fa-3x mb-2"></i>
+                                            <h6>Қозғалмайтын тірек</h6>
+                                            <p class="small text-muted mb-0">Тік және көлденең реакциялар</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Арқалықтарды талдау әдісі</h5>
+                            <ol class="mt-3">
+                                <li>Арқалықты еркін дене ретінде бейнелеу</li>
+                                <li>Барлық сыртқы күштерді көрсету</li>
+                                <li>Тірек реакцияларын белгілеу</li>
+                                <li>Тепе-теңдік теңдеулерін жазу</li>
+                                <li>Теңдеулер жүйесін шешу</li>
+                            </ol>
+                            <div class="formula-box mt-3">
+                                <p>Арқалық үшін тепе-теңдік теңдеулері:</p>
+                                <code>∑F<sub>x</sub> = 0<br>
+                                ∑F<sub>y</sub> = 0<br>
+                                ∑M = 0</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Практика бөлімі -->
+        <section id="practice" class="mb-5">
+            <h2 class="text-center mb-4"><i class="fas fa-tasks me-2"></i>Практикалық есептер</h2>
+            
+            <!-- 1-есеп -->
+            <div class="card mb-4 border-0 shadow">
+                <div class="card-header bg-success text-white">
+                    <h3><i class="fas fa-question-circle me-2"></i>Есеп 1: Салмақтар тепе-теңдігі</h3>
+                </div>
+                <div class="card-body">
+                    <p>Ұзындығы 4 метр арқалықтың бір ұшында 30 кг салмақ ілінген. Арқалықтың ортасында 50 кг салмақ ілінген. Арқалық тепе-теңдікте болу үшін қай жерден қолдау керек?</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form id="staticsProblem1">
+                                <div class="mb-3">
+                                    <label class="form-label">Арқалық ұзындығы (L):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" value="4" readonly>
+                                        <span class="input-group-text">м</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Бірінші салмақ (m₁):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" value="30" readonly>
+                                        <span class="input-group-text">кг</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Екінші салмақ (m₂):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" value="50" readonly>
+                                        <span class="input-group-text">кг</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Қолдау нүктесінің қашықтығы (x):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="supportDistance" step="0.1">
+                                        <span class="input-group-text">м</span>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary me-2" onclick="checkSolution(1)">
+                                    <i class="fas fa-check me-1"></i>Тексеру
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="showSolution(1)">
+                                    <i class="fas fa-lightbulb me-1"></i>Шешімді көрсету
+                                </button>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="solution-box p-3 bg-light rounded" id="solution1" style="display: none;">
+                                <h5><i class="fas fa-info-circle me-2 text-success"></i>Шешімі:</h5>
+                                <p>1. Қолдау нүктесіне қатысты моменттер тепе-теңдігін жазамыз:</p>
+                                <p><code>m₁·g·x = m₂·g·(2 - x)</code></p>
+                                <p>2. Жеңілдетеміз (g-ны қысқартамыз):</p>
+                                <p><code>30·x = 50·(2 - x)</code></p>
+                                <p>3. Теңдеуді шешеміз:</p>
+                                <p><code>30x = 100 - 50x</code></p>
+                                <p><code>80x = 100</code></p>
+                                <p><code>x = 1.25 м</code></p>
+                                <p class="fw-bold">Жауабы: <span class="text-success">1.25 метр (арқалықтың сол ұшынан)</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2-есеп -->
+            <div class="card mb-4 border-0 shadow">
+                <div class="card-header bg-purple text-white" style="background-color: #6f42c1;">
+                    <h3><i class="fas fa-question-circle me-2"></i>Есеп 2: Бекітілген арқалық</h3>
+                </div>
+                <div class="card-body">
+                    <p>Ұзындығы 3 м бекітілген арқалықтың еркін ұшында 200 Н күш тік төмен әсер етеді. Арқалықтың тіреу реакцияларын (көлденең және тік күштер, момент) анықтаңыз.</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form id="staticsProblem2">
+                                <div class="mb-3">
+                                    <label class="form-label">Арқалық ұзындығы (L):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" value="3" readonly>
+                                        <span class="input-group-text">м</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Күш (F):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" value="200" readonly>
+                                        <span class="input-group-text">Н</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Тік реакция күші (R<sub>y</sub>):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="verticalReaction">
+                                        <span class="input-group-text">Н</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Көлденең реакция күші (R<sub>x</sub>):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="horizontalReaction">
+                                        <span class="input-group-text">Н</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Бекіту моменті (M):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="supportMoment">
+                                        <span class="input-group-text">Н·м</span>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary me-2" onclick="checkSolution(2)">
+                                    <i class="fas fa-check me-1"></i>Тексеру
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="showSolution(2)">
+                                    <i class="fas fa-lightbulb me-1"></i>Шешімді көрсету
+                                </button>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="solution-box p-3 bg-light rounded" id="solution2" style="display: none;">
+                                <h5><i class="fas fa-info-circle me-2" style="color: #6f42c1;"></i>Шешімі:</h5>
+                                <p>1. Көлденең күштер тепе-теңдігі:</p>
+                                <p><code>∑F<sub>x</sub> = 0 ⇒ R<sub>x</sub> = 0</code></p>
+                                <p>2. Тік күштер тепе-теңдігі:</p>
+                                <p><code>∑F<sub>y</sub> = 0 ⇒ R<sub>y</sub> - 200 = 0 ⇒ R<sub>y</sub> = 200 Н</code></p>
+                                <p>3. Моменттер тепе-теңдігі (бекіту нүктесіне қатысты):</p>
+                                <p><code>∑M = 0 ⇒ M - 200·3 = 0 ⇒ M = 600 Н·м</code></p>
+                                <p class="fw-bold">Жауабы:</p>
+                                <ul class="fw-bold">
+                                    <li>Тік реакция: <span class="text-success">200 Н (жоғары)</span></li>
+                                    <li>Көлденең реакция: <span class="text-success">0 Н</span></li>
+                                    <li>Бекіту моменті: <span class="text-success">600 Н·м (сағат тіліне қарсы)</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Анимация бөлімі -->
+        <section class="mb-5">
+            <div class="card border-0 shadow">
+                <div class="card-header bg-dark text-white">
+                    <h3><i class="fas fa-play-circle me-2"></i>Арқалық тепе-теңдігінің симуляторы</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5>Арқалық параметрлері</h5>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Арқалық ұзындығы: <span id="beamLengthValue">4</span> м</label>
+                                <input type="range" class="form-range" id="beamLengthSlider" min="2" max="6" step="0.5" value="4">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Сол жақ салмақ: <span id="leftWeightValue">30</span> кг</label>
+                                <input type="range" class="form-range" id="leftWeightSlider" min="10" max="50" value="30">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Оң жақ салмақ: <span id="rightWeightValue">50</span> кг</label>
+                                <input type="range" class="form-range" id="rightWeightSlider" min="10" max="50" value="50">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Қолдау нүктесі: <span id="supportPositionValue">1.25</span> м</label>
+                                <input type="range" class="form-range" id="supportPositionSlider" min="0.5" max="3.5" step="0.1" value="1.25">
+                            </div>
+                            
+                            <button id="balanceBeam" class="btn btn-primary">
+                                <i class="fas fa-balance-scale me-1"></i>Тепе-теңдікке келтіру
+                            </button>
+                        </div>
+                        <div class="col-md-8">
+                            <canvas id="beamCanvas" width="600" height="300"></canvas>
+                            <div class="mt-3 alert alert-info">
+                                <p><strong>Тепе-теңдік шарты:</strong></p>
+                                <p><code>m₁·g·x = m₂·g·(L/2 - x)</code></p>
+                                <p id="balanceCalculation" class="mb-0"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Қолданыс бөлімі -->
+        <section class="mb-5">
+            <div class="card border-0 shadow">
+                <div class="card-header bg-secondary text-white">
+                    <h3><i class="fas fa-lightbulb me-2"></i>Күнделікті өмірдегі қолданысы</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="nav nav-pills mb-4" id="applicationsTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="construction-tab" data-bs-toggle="pill" data-bs-target="#construction" type="button">
+                                <i class="fas fa-building me-1"></i>Құрылыс
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="machines-tab" data-bs-toggle="pill" data-bs-target="#machines" type="button">
+                                <i class="fas fa-cogs me-1"></i>Машиналар
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="nature-tab" data-bs-toggle="pill" data-bs-target="#nature" type="button">
+                                <i class="fas fa-tree me-1"></i>Табиғат
+                            </button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="applicationsTabContent">
+                        <div class="tab-pane fade show active" id="construction" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card h-100">
+                                        <img src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Көпір">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Көпірлер</h5>
+                                            <p class="card-text">Көпірлердің конструкциясы статика заңдарына негізделген. Әрбір тірек белгілі бір жүктемені ғана көтере алады.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card h-100">
+                                        <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Ғимарат">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Ғимараттар</h5>
+                                            <p class="card-text">Ғимараттардың қабырғалары мен іргетастары жүктемені тең бөліп, тепе-теңдікті сақтау үшін есептеледі.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card h-100">
+                                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Кран">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Крандар</h5>
+                                            <p class="card-text">Крандардың тұрақтылығы массалар центрінің орналасуына байланысты. Артық жүктеме кранды деңгейден айналдырады.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="machines" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card h-100">
+                                        <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a7d0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Сағат">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Сағат механизмдері</h5>
+                                            <p class="card-text">Сағат тілдерінің айналу моменттері статика заңдары бойынша есептеледі, бұл дәл уақытты қамтамасыз етеді.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card h-100">
+                                        <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Аспап">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Механикалық аспаптар</h5>
+                                            <p class="card-text">Қысқыштар, аралар, қол аралар моменттер ережесін пайдаланады, кіші күшпен үлкен жұмыс істеуге мүмкіндік береді.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card h-100">
+                                        <img src="https://images.unsplash.com/photo-1581093057305-24150d7d1e6e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Велосипед">
+                                       
+</body>
+</html>

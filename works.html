@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Физика есептері - Физика порталы</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="./физика.webp">
+
+    <style>
+        .problem-card {
+            transition: transform 0.3s;
+            border-radius: 10px;
+        }
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .formula-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #0d6efd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .solution-step {
+            border-left: 3px solid #20c997;
+            padding-left: 15px;
+            margin-bottom: 15px;
+        }
+        .difficulty-easy {
+            border-left: 5px solid #28a745;
+        }
+        .difficulty-medium {
+            border-left: 5px solid #ffc107;
+        }
+        .difficulty-hard {
+            border-left: 5px solid #dc3545;
+        }
+        .topic-filter {
+            cursor: pointer;
+        }
+        .topic-filter.active {
+            background-color: #0d6efd;
+            color: white;
+        }
+        #graphCanvas {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-atom me-2"></i>Физика порталы
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="kinematics.html">Кинематика</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dynamics.html">Динамика</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="statics.html">Статика</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Есептер</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center language-switcher text-white">
+                    <i class="fas fa-language me-2"></i>
+                    <span id="languageText">Қаз</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <!-- Кіріспе -->
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 mb-3">Физика есептері</h1>
+                <p class="lead">Әртүрлі деңгейдегі физика есептерінің жинағы</p>
+                <div class="d-flex justify-content-center gap-3 mt-4">
+                    <a href="#problems" class="btn btn-primary btn-lg">
+                        <i class="fas fa-tasks me-2"></i>Есептер
+                    </a>
+                    <a href="#solutions" class="btn btn-success btn-lg">
+                        <i class="fas fa-lightbulb me-2"></i>Шешімдер
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Фильтрлер -->
+        <section class="mb-5">
+            <div class="card border-0 shadow">
+                <div class="card-header bg-dark text-white">
+                    <h3><i class="fas fa-filter me-2"></i>Есептерді сүзгілеу</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <h5>Тақырып бойынша:</h5>
+                            <div class="d-flex flex-wrap gap-2 mt-3">
+                                <span class="badge topic-filter active" onclick="filterProblems('all')">Барлығы</span>
+                                <span class="badge topic-filter" onclick="filterProblems('kinematics')">Кинематика</span>
+                                <span class="badge topic-filter" onclick="filterProblems('dynamics')">Динамика</span>
+                                <span class="badge topic-filter" onclick="filterProblems('statics')">Статика</span>
+                                <span class="badge topic-filter" onclick="filterProblems('energy')">Энергия</span>
+                                <span class="badge topic-filter" onclick="filterProblems('electricity')">Электр</span>
+                                <span class="badge topic-filter" onclick="filterProblems('optics')">Оптика</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <h5>Қиындық деңгейі:</h5>
+                            <div class="d-flex flex-wrap gap-2 mt-3">
+                                <span class="badge bg-success difficulty-filter" onclick="filterByDifficulty('all')">Барлығы</span>
+                                <span class="badge bg-success difficulty-filter" onclick="filterByDifficulty('easy')">Оңай</span>
+                                <span class="badge bg-warning text-dark difficulty-filter" onclick="filterByDifficulty('medium')">Орташа</span>
+                                <span class="badge bg-danger difficulty-filter" onclick="filterByDifficulty('hard')">Қиын</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Түрі бойынша:</h5>
+                            <div class="d-flex flex-wrap gap-2 mt-3">
+                                <span class="badge bg-secondary type-filter" onclick="filterByType('all')">Барлығы</span>
+                                <span class="badge bg-secondary type-filter" onclick="filterByType('conceptual')">Түсініктік</span>
+                                <span class="badge bg-secondary type-filter" onclick="filterByType('calculation')">Есептеу</span>
+                                <span class="badge bg-secondary type-filter" onclick="filterByType('graphical')">Графикалық</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Есептер бөлімі -->
+        <section id="problems" class="mb-5">
+            <h2 class="text-center mb-4"><i class="fas fa-tasks me-2"></i>Есептер</h2>
+            
+            <!-- 1-есеп -->
+            <div class="card mb-4 border-0 shadow problem-card difficulty-easy" data-topic="kinematics" data-difficulty="easy" data-type="calculation">
+                <div class="card-header bg-primary text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3>Есеп 1: Түзусызықты бірқалыпты қозғалыс</h3>
+                        <span class="badge bg-success">Оңай</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p>Велосипедші 5 м/с жылдамдықпен 2 сағат жүрді. Ол қандай қашықтықты жүріп өтті?</p>
+                    <div class="formula-box">
+                        <p><strong>Берілгені:</strong></p>
+                        <ul>
+                            <li>Жылдамдық (v) = 5 м/с</li>
+                            <li>Уақыт (t) = 2 сағат = 7200 секунд</li>
+                        </ul>
+                        <p><strong>Табу керек:</strong> Жол (s) = ?</p>
+                    </div>
+                    <button class="btn btn-outline-primary mt-3" onclick="showSolution('problem1')">
+                        <i class="fas fa-eye me-1"></i>Шешімді көрсету
+                    </button>
+                    <div id="problem1-solution" style="display: none;">
+                        <div class="solution-step mt-3">
+                            <h5><i class="fas fa-check-circle text-success me-2"></i>Шешімі:</h5>
+                            <p>Түзусызықты бірқалыпты қозғалыс формуласы:</p>
+                            <p><code>s = v · t</code></p>
+                            <p>Сандарды қоямыз:</p>
+                            <p><code>s = 5 м/с · 7200 с = 36000 м = 36 км</code></p>
+                            <p class="fw-bold">Жауабы: <span class="text-success">36 километр</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2-есеп -->
+            <div class="card mb-4 border-0 shadow problem-card difficulty-medium" data-topic="dynamics" data-difficulty="medium" data-type="calculation">
+                <div class="card-header bg-warning text-dark">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3>Есеп 2: Үдемелі қозғалыс</h3>
+                        <span class="badge bg-warning text-dark">Орташа</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p>Массасы 1000 кг автомобиль 10 секунд ішінде жылдамдығын 0-ден 20 м/с-қа дейін арттырды. Автокөліктің орташа үдеуін және қозғалтқыштың әсер еткен күшін табыңыз.</p>
+                    <div class="formula-box">
+                        <p><strong>Берілгені:</strong></p>
+                        <ul>
+                            <li>Масса (m) = 1000 кг</li>
+                            <li>Бастапқы жылдамдық (v₀) = 0 м/с</li>
+                            <li>Соңғы жылдамдық (v) = 20 м/с</li>
+                            <li>Уақыт (t) = 10 с</li>
+                        </ul>
+                        <p><strong>Табу керек:</strong> Үдеу (a) = ?, Күш (F) = ?</p>
+                    </div>
+                    <button class="btn btn-outline-primary mt-3" onclick="showSolution('problem2')">
+                        <i class="fas fa-eye me-1"></i>Шешімді көрсету
+                    </button>
+                    <div id="problem2-solution" style="display: none;">
+                        <div class="solution-step mt-3">
+                            <h5><i class="fas fa-check-circle text-success me-2"></i>Шешімі:</h5>
+                            <p>1. Үдеуді табамыз:</p>
+                            <p><code>a = (v - v₀)/t = (20 м/с - 0 м/с)/10 с = 2 м/с²</code></p>
+                            <p>2. Ньютонның екінші заңы бойынша күшті табамыз:</p>
+                            <p><code>F = m · a = 1000 кг · 2 м/с² = 2000 Н</code></p>
+                            <p class="fw-bold">Жауабы:</p>
+                            <ul class="fw-bold">
+                                <li>Үдеу: <span class="text-success">2 м/с²</span></li>
+                                <li>Күш: <span class="text-success">2000 Ньютон</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3-есеп -->
+            <div class="card mb-4 border-0 shadow problem-card difficulty-hard" data-topic="statics" data-difficulty="hard" data-type="calculation">
+                <div class="card-header bg-danger text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3>Есеп 3: Арқалық тепе-теңдігі</h3>
+                        <span class="badge bg-danger">Қиын</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p>Ұзындығы 4 метр біртекті арқалықтың массасы 20 кг. Арқалықтың сол ұшында 30 кг салмақ ілінген. Арқалық тепе-теңдікте болу үшін оны қай жерден қолдау керек?</p>
+                    <div class="formula-box">
+                        <p><strong>Берілгені:</strong></p>
+                        <ul>
+                            <li>Арқалық ұзындығы (L) = 4 м</li>
+                            <li>Арқалық массасы (m) = 20 кг (ортасында әсер етеді)</li>
+                            <li>Салмақ массасы (M) = 30 кг</li>
+                        </ul>
+                        <p><strong>Табу керек:</strong> Қолдау нүктесінің қашықтығы (x) = ?</p>
+                    </div>
+                    <button class="btn btn-outline-primary mt-3" onclick="showSolution('problem3')">
+                        <i class="fas fa-eye me-1"></i>Шешімді көрсету
+                    </button>
+                    <div id="problem3-solution" style="display: none;">
+                        <div class="solution-step mt-3">
+                            <h5><i class="fas fa-check-circle text-success me-2"></i>Шешімі:</h5>
+                            <p>1. Арқалықтың массасы ортасында әсер етеді (2 м нүктесінде).</p>
+                            <p>2. Қолдау нүктесіне қатысты моменттер тепе-теңдігін жазамыз:</p>
+                            <p><code>M·g·x = m·g·(2 - x)</code></p>
+                            <p>3. g-ны қысқартамыз және теңдеуді шешеміз:</p>
+                            <p><code>30·x = 20·(2 - x)</code></p>
+                            <p><code>30x = 40 - 20x</code></p>
+                            <p><code>50x = 40</code></p>
+                            <p><code>x = 0.8 м</code></p>
+                            <p class="fw-bold">Жауабы: <span class="text-success">0.8 метр (арқалықтың сол ұшынан)</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4-есеп -->
+            <div class="card mb-4 border-0 shadow problem-card difficulty-medium" data-topic="energy" data-difficulty="medium" data-type="conceptual">
+                <div class="card-header bg-info text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3>Есеп 4: Энергияның сақталу заңы</h3>
+                        <span class="badge bg-warning text-dark">Орташа</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p>Массасы 2 кг доп 10 м биіктіктен құлап түседі. Доп жерге тигендегі жылдамдығын табыңыз (ауа кедергісін ескермеңіз).</p>
+                    <div class="formula-box">
+                        <p><strong>Берілгені:</strong></p>
+                        <ul>
+                            <li>Масса (m) = 2 кг</li>
+                            <li>Биіктік (h) = 10 м</li>
+                            <li>Еркін түсу үдеуі (g) = 9.8 м/с²</li>
+                        </ul>
+                        <p><strong>Табу керек:</strong> Жылдамдық (v) = ?</p>
+                    </div>
+                    <button class="btn btn-outline-primary mt-3" onclick="showSolution('problem4')">
+                        <i class="fas fa-eye me-1"></i>Шешімді көрсету
+                    </button>
+                    <div id="problem4-solution" style="display: none;">
+                        <div class="solution-step mt-3">
+                            <h5><i class="fas fa-check-circle text-success me-2"></i>Шешімі:</h5>
+                            <p>Энергияның сақталу заңын қолданамыз:</p>
+                            <p><code>m·g·h = (m·v²)/2</code></p>
+                            <p>m-ны қысқартамыз:</p>
+                            <p><code>g·h = v²/2</code></p>
+                            <p>Жылдамдықты табамыз:</p>
+                            <p><code>v = √(2·g·h) = √(2·9.8·10) = √196 ≈ 14 м/с</code></p>
+                            <p class="fw-bold">Жауабы: <span class="text-success">14 м/с</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5-есеп -->
+            <div class="card mb-4 border-0 shadow problem-card difficulty-hard" data-topic="electricity" data-difficulty="hard" data-type="graphical">
+                <div class="card-header bg-purple text-white" style="background-color: #6f42c1;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3>Есеп 5: Электр тізбегі</h3>
+                        <span class="badge bg-danger">Қиын</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p>Тізбектей жалғанған екі кедергінің (R₁ = 2 Ом, R₂ = 4 Ом) арқылы 12 В кернеу берілген. Әр кедергідегі кернеудің төмендеуін және тізбектегі ток күшін табыңыз.</p>
+                    <div class="formula-box">
+                        <p><strong>Берілгені:</strong></p>
+                        <ul>
+                            <li>R₁ = 2 Ом</li>
+                            <li>R₂ = 4 Ом</li>
+                            <li>Жалпы кернеу (U) = 12 В</li>
+                        </ul>
+                        <p><strong>Табу керек:</strong> I = ?, U₁ = ?, U₂ = ?</p>
+                    </div>
+                    <div class="text-center my-3">
+                        <img src="https://www.allaboutcircuits.com/uploads/articles/series-circuit-with-two-resistors-and-battery.jpg" alt="Электр тізбегі" class="img-fluid rounded" style="max-height: 200px;">
+                    </div>
+                    <button class="btn btn-outline-primary mt-3" onclick="showSolution('problem5')">
+                        <i class="fas fa-eye me-1"></i>Шешімді көрсету
+                    </button>
+                    <div id="problem5-solution" style="display: none;">
+                        <div class="solution-step mt-3">
+                            <h5><i class="fas fa-check-circle text-success me-2"></i>Шешімі:</h5>
+                            <p>1. Жалпы кедергіні табамыз:</p>
+                            <p><code>R = R₁ + R₂ = 2 Ом + 4 Ом = 6 Ом</code></p>
+                            <p>2. Ом заңы бойынша ток күшін табамыз:</p>
+                            <p><code>I = U/R = 12 В / 6 Ом = 2 А</code></p>
+                            <p>3. Әр кедергідегі кернеудің төмендеуін табамыз:</p>
+                            <p><code>U₁ = I·R₁ = 2 А · 2 Ом = 4 В</code></p>
+                            <p><code>U₂ = I·R₂ = 2 А · 4 Ом = 8 В</code></p>
+                            <p class="fw-bold">Жауабы:</p>
+                            <ul class="fw-bold">
+                                <li>Ток күші: <span class="text-success">2 Ампер</span></li>
+                                <li>R₁ кернеуі: <span class="text-success">4 Вольт</span></li>
+                                <li>R₂ кернеуі: <span class="text-success">8 Вольт</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Графикалық есептер -->
+        <section class="mb-5">
+            <div class="card border-0 shadow">
+                <div class="card-header bg-dark text-white">
+                    <h3><i class="fas fa-chart-line me-2"></i>Графикалық есептер</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Жылдамдық-уақыт графигі</h5>
+                            <p>Дененің қозғалысы жылдамдық-уақыт графигінде көрсетілген. График бойынша:</p>
+                            <ol>
+                                <li>Үдеуді әр аралықта табыңыз</li>
+                                <li>Жалпы жүрілген жолды есептеңіз</li>
+                                <li>Орташа жылдамдықты табыңыз</li>
+                            </ol>
+                            <div class="formula-box mt-3">
+                                <p>Үдеу: <code>a = Δv/Δt</code></p>
+                                <p>Жол: <code>s = график астындағы аудан</code></p>
+                                <p>Орташа жылдамдық: <code>v<sub>орт</sub> = жалпы жол/жалпы уақыт</code></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <canvas id="graphCanvas" height="300"></canvas>
+                            <div class="text-center mt-3">
+                                <button class="btn btn-primary" onclick="analyzeGraph()">
+                                    <i class="fas fa-calculator me-1"></i>Талдау
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4" id="graphAnalysis" style="display: none;">
+                        <h5><i class="fas fa-chart-bar me-2"></i>График талдауы</h5>
+                        <div class="solution-step">
+                            <p><strong>0-2 секунд:</strong> Үдеу = (10-0)/(2-0) = 5 м/с²</p>
+                            <p><strong>2-5 секунд:</strong> Үдеу = (10-10)/(5-2) = 0 м/с² (бірқалыпты қозғалыс)</p>
+                            <p><strong>5-7 секунд:</strong> Үдеу = (0-10)/(7-5) = -5 м/с²</p>
+                            <p><strong>Жалпы жол:</strong></p>
+                            <p>0-2с: (10·2)/2 = 10 м</p>
+                            <p>2-5с: 10·3 = 30 м</p>
+                            <p>5-7с: (10·2)/2 = 10 м</p>
+                            <p>Жалпы жол = 10 + 30 + 10 = 50 м</p>
+                            <p><strong>Орташа жылдамдық:</strong> 50 м / 7 с ≈ 7.14 м/с</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Қосымша материалдар -->
+        <section class="mb-5">
+            <div class="card border-0 shadow">
+                <div class="card-header bg-secondary text-white">
+                    <h3><i class="fas fa-book-reader me-2"></i>Қосымша материалдар</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5><i class="fas fa-book me-2 text-primary"></i>Физика оқулықтары:</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h6 class="mb-1">Физика. 7-9 сынып</h6>
+                                            <small class="text-muted">Ә.Бекбаев, Қ.Құрманбаев</small>
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill">PDF</span>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h6 class="mb-1">Физика. 10-11 сынып</h6>
+                                            <small class="text-muted">Ж.Смағұлов, Н.Омаров</small>
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill">PDF</span>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h6 class="mb-1">Физика есептер жинағы</h6>
+                                            <small class="text-muted">Р.Құрманғалиев</small>
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill">PDF</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5><i class="fas fa-link me-2 text-success"></i>Пайдалы ресурстар:</h5>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">Khan Academy - Физика</h6>
+                                        <small class="text-muted">khanacademy.org</small>
+                                    </div>
+                                    <p class="mb-1 small">Физика бойынша тегін видео сабақтар</p>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">PhET симуляциялары</h6>
+                                        <small class="text-muted">phet.colorado.edu</small>
+                                    </div>
+                                    <p class="mb-1 small">Физикалық процестерді интерактивті зерттеу</p>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">Физикалық есептер шешімдері</h6>
+                                        <small class="text-muted">fizika.kz</small>
+                                    </div>
+                                    <p class="mb-1 small">Физика есептерінің үлгілі шешімдері</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="#" class="btn btn-primary me-2">
+                            <i class="fas fa-download me-1"></i>Барлық материалдар
+                        </a>
+                        <a href="#" class="btn btn-outline-success">
+                            <i class="fas fa-graduation-cap me-1"></i>Интерактивті оқулық
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Футер -->
+    <footer class="bg-light py-4 mt-5">
+        <div class="container text-center">
+            <p class="mb-2">© 2023 Физика порталы. Барлық құқықтар қорғалған.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="#" class="text-decoration-none"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-decoration-none"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-decoration-none"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-decoration-none"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS, Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        // Тіл ауыстыру
+        document.querySelector('.language-switcher').addEventListener('click', function() {
+            const languageText = document.getElementById('languageText');
+            if (languageText.textContent === 'Қаз') {
+                languageText.textContent = 'Рус';
+                // Мұнда тілді ауыстыру функциясын қосу керек
+            } else {
+                languageText.textContent = 'Қаз';
+            }
+        });
+
+        // Есептерді сүзгілеу
+        function filterProblems(topic) {
+            document.querySelectorAll('.topic-filter').forEach(el => el.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const problems = document.querySelectorAll('.problem-card');
+            problems.forEach(problem => {
+                if (topic === 'all' || problem.dataset.topic === topic) {
+                    problem.style.display = 'block';
+                } else {
+                    problem.style.display = 'none';
+                }
+            });
+        }
+
+        function filterByDifficulty(difficulty) {
+            const problems = document.querySelectorAll('.problem-card');
+            problems.forEach(problem => {
+                if (difficulty === 'all' || problem.dataset.difficulty === difficulty) {
+                    problem.style.display = 'block';
+                } else {
+                    problem.style.display = 'none';
+                }
+            });
+        }
+
+        function filterByType(type) {
+            const problems = document.querySelectorAll('.problem-card');
+            problems.forEach(problem => {
+                if (type === 'all' || problem.dataset.type === type) {
+                    problem.style.display = 'block';
+                } else {
+                    problem.style.display = 'none';
+                }
+            });
+        }
+
+        // Шешімдерді көрсету
+        function showSolution(problemId) {
+            const solution = document.getElementById(problemId + '-solution');
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                event.target.innerHTML = '<i class="fas fa-eye-slash me-1"></i>Шешімді жасыру';
+            } else {
+                solution.style.display = 'none';
+                event.target.innerHTML = '<i class="fas fa-eye me-1"></i>Шешімді көрсету';
+            }
+        }
+
+        // График құру
+        const graphCtx = document.getElementById('graphCanvas').getContext('2d');
+        const velocityChart = new Chart(graphCtx, {
+            type: 'line',
+            data: {
+                labels: ['0', '1', '2', '3', '4', '5', '6', '7'],
+                datasets: [{
+                    label: 'Жылдамдық (м/с)',
+                    data: [0, 5, 10, 10, 10, 10, 5, 0],
+                    borderColor: 'rgb(75, 192, 192)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.1,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Жылдамдық-уақыт графигі'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `Жылдамдық: ${context.parsed.y} м/с`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Жылдамдық (м/с)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Уақыт (с)'
+                        }
+                    }
+                }
+            }
+        });
+</script>
+</body>
+</html>
+       

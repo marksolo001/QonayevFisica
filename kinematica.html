@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кинематика - Физика порталы</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="./физика.webp">
+    <style>
+        .theory-card {
+            transition: transform 0.3s;
+        }
+        .theory-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .formula-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #0d6efd;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        .navbar-brand {
+            font-weight: 700;
+        }
+        .language-switcher {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-atom me-2"></i>Физика порталы
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Кинематика</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Динамика</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Статика</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center language-switcher text-white">
+                    <i class="fas fa-language me-2"></i>
+                    <span id="languageText">Қаз</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <!-- Кіріспе -->
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 mb-3">Кинематика</h1>
+                <p class="lead">Денелердің қозғалысын сипаттау ғылымы</p>
+                <div class="d-flex justify-content-center gap-3 mt-4">
+                    <a href="#theory" class="btn btn-primary btn-lg">
+                        <i class="fas fa-book me-2"></i>Теория
+                    </a>
+                    <a href="#practice" class="btn btn-success btn-lg">
+                        <i class="fas fa-tasks me-2"></i>Есептер
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Теория бөлімі -->
+        <section id="theory" class="mb-5">
+            <h2 class="text-center mb-4"><i class="fas fa-book-open me-2"></i>Негізгі ұғымдар</h2>
+            
+            <!-- Қозғалыс түрлері -->
+            <div class="card mb-4 border-0 shadow theory-card">
+                <div class="card-header bg-primary text-white">
+                    <h3><i class="fas fa-running me-2"></i>Қозғалыс түрлері</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="text-center p-3 h-100">
+                                <div class="bg-light p-4 rounded-circle d-inline-block mb-3">
+                                    <i class="fas fa-arrow-right fa-3x text-success"></i>
+                                </div>
+                                <h5>Түзусызықты қозғалыс</h5>
+                                <p>Траекториясы түзу сызық болатын қозғалыс</p>
+                                <div class="formula-box text-start">
+                                    <code>s = v·t</code>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="text-center p-3 h-100">
+                                <div class="bg-light p-4 rounded-circle d-inline-block mb-3">
+                                    <i class="fas fa-tachometer-alt fa-3x text-warning"></i>
+                                </div>
+                                <h5>Үдемелі қозғалыс</h5>
+                                <p>Уақыт өткен сайын жылдамдығы артатын қозғалыс</p>
+                                <div class="formula-box text-start">
+                                    <code>v = v₀ + a·t</code><br>
+                                    <code>s = v₀·t + (a·t²)/2</code>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="text-center p-3 h-100">
+                                <div class="bg-light p-4 rounded-circle d-inline-block mb-3">
+                                    <i class="fas fa-stopwatch fa-3x text-danger"></i>
+                                </div>
+                                <h5>Бірқалыпты қозғалыс</h5>
+                                <p>Жылдамдығы тұрақты қозғалыс</p>
+                                <div class="formula-box text-start">
+                                    <code>v = const</code><br>
+                                    <code>s = v·t</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Формулалар кестесі -->
+            <div class="card mb-4 border-0 shadow theory-card">
+                <div class="card-header bg-success text-white">
+                    <h3><i class="fas fa-calculator me-2"></i>Кинематикалық формулалар</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Шама</th>
+                                    <th>Анықтамасы</th>
+                                    <th>Формула</th>
+                                    <th>Өлшем бірлігі</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Жылдамдық</td>
+                                    <td>Уақыт бірлігіндегі орын ауыстыру</td>
+                                    <td><code>v = Δs/Δt</code></td>
+                                    <td>м/с</td>
+                                </tr>
+                                <tr>
+                                    <td>Орташа жылдамдық</td>
+                                    <td>Барлық жолдың барлық уақытқа қатынасы</td>
+                                    <td><code>v<sub>орт</sub> = (s<sub>1</sub>+s<sub>2</sub>)/(t<sub>1</sub>+t<sub>2</sub>)</code></td>
+                                    <td>м/с</td>
+                                </tr>
+                                <tr>
+                                    <td>Үдеу</td>
+                                    <td>Уақыт бірлігіндегі жылдамдықтың өзгеруі</td>
+                                    <td><code>a = Δv/Δt</code></td>
+                                    <td>м/с²</td>
+                                </tr>
+                                <tr>
+                                    <td>Бірқалыпты үдемелі қозғалыстағы жол</td>
+                                    <td>Уақытқа тәуелді жол</td>
+                                    <td><code>s = v₀·t + (a·t²)/2</code></td>
+                                    <td>м</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Практика бөлімі -->
+        <section id="practice" class="mb-5">
+            <h2 class="text-center mb-4"><i class="fas fa-tasks me-2"></i>Практикалық есептер</h2>
+            
+            <!-- 1-есеп -->
+            <div class="card mb-4 border-0 shadow">
+                <div class="card-header bg-info text-white">
+                    <h3><i class="fas fa-question-circle me-2"></i>Есеп 1: Үдемелі қозғалыс</h3>
+                </div>
+                <div class="card-body">
+                    <p>Дене 5 м/с жылдамдықпен қозғала бастады. Оның үдеуі 2 м/с². 10 секундтан кейін дененің жылдамдығы қандай болады?</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form id="kinematicsProblem1">
+                                <div class="mb-3">
+                                    <label class="form-label">Бастапқы жылдамдық (v₀):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" value="5" readonly>
+                                        <span class="input-group-text">м/с</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Үдеу (a):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" value="2" readonly>
+                                        <span class="input-group-text">м/с²</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Уақыт (t):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" value="10" readonly>
+                                        <span class="input-group-text">с</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Соңғы жылдамдық (v):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="finalVelocity">
+                                        <span class="input-group-text">м/с</span>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary me-2" onclick="checkSolution(1)">
+                                    <i class="fas fa-check me-1"></i>Тексеру
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="showSolution(1)">
+                                    <i class="fas fa-lightbulb me-1"></i>Шешімді көрсету
+                                </button>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="solution-box p-3 bg-light rounded" id="solution1" style="display: none;">
+                                <h5><i class="fas fa-info-circle me-2 text-info"></i>Шешімі:</h5>
+                                <p>Үдемелі қозғалыс формуласы: <code>v = v₀ + a·t</code></p>
+                                <p>Есептеу: <code>v = 5 + 2·10 = 25 м/с</code></p>
+                                <p class="fw-bold">Жауабы: <span class="text-success">25 м/с</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2-есеп -->
+            <div class="card mb-4 border-0 shadow">
+                <div class="card-header bg-warning text-dark">
+                    <h3><i class="fas fa-question-circle me-2"></i>Есеп 2: Тормоз жолы</h3>
+                </div>
+                <div class="card-body">
+                    <p>Автокөлік 72 км/сағ жылдамдықпен қозғалған. Жағдайды көріп, жүргізуші тежеп, 5 м/с² үдеумен тоқтаған. Автокөліктің тормоз жолын табыңыз.</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form id="kinematicsProblem2">
+                                <div class="mb-3">
+                                    <label class="form-label">Бастапқы жылдамдық (v₀):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" value="72" id="initialVel2">
+                                        <span class="input-group-text">км/сағ</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Үдеу (a):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" value="-5" readonly>
+                                        <span class="input-group-text">м/с²</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Соңғы жылдамдық (v):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" value="0" readonly>
+                                        <span class="input-group-text">м/с</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Тормоз жолы (s):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="brakingDistance">
+                                        <span class="input-group-text">м</span>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary me-2" onclick="checkSolution(2)">
+                                    <i class="fas fa-check me-1"></i>Тексеру
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="showSolution(2)">
+                                    <i class="fas fa-lightbulb me-1"></i>Шешімді көрсету
+                                </button>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="solution-box p-3 bg-light rounded" id="solution2" style="display: none;">
+                                <h5><i class="fas fa-info-circle me-2 text-warning"></i>Шешімі:</h5>
+                                <p>1. Жылдамдықты м/с-қа айналдыру: <code>72 км/сағ = 72/3.6 = 20 м/с</code></p>
+                                <p>2. Формула: <code>v² = v₀² + 2·a·s</code></p>
+                                <p>3. Есептеу: <code>0 = 20² + 2·(-5)·s → 400 = 10s → s = 40 м</code></p>
+                                <p class="fw-bold">Жауабы: <span class="text-success">40 метр</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Графикалық бөлім -->
+        <section class="mb-5">
+            <div class="card border-0 shadow">
+                <div class="card-header bg-dark text-white">
+                    <h3><i class="fas fa-chart-line me-2"></i>Графикалық талдау</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <ul class="nav nav-tabs mb-3" id="graphTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="velocity-tab" data-bs-toggle="tab" data-bs-target="#velocity-graph" type="button">
+                                        Жылдамдық-уақыт
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="distance-tab" data-bs-toggle="tab" data-bs-target="#distance-graph" type="button">
+                                        Жол-уақыт
+                                    </button>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="graphTabsContent">
+                                <div class="tab-pane fade show active" id="velocity-graph" role="tabpanel">
+                                    <canvas id="velocityTimeGraph" height="300"></canvas>
+                                </div>
+                                <div class="tab-pane fade" id="distance-graph" role="tabpanel">
+                                    <canvas id="distanceTimeGraph" height="300"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Графиктерді талдау</h5>
+                            <p class="text-muted">Параметрлерді өзгертіп, графиктердің өзгеруін бақылаңыз</p>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Бастапқы жылдамдық (v₀):</label>
+                                <input type="range" class="form-range" id="initialVelocitySlider" min="0" max="30" step="1" value="5">
+                                <p id="initialVelocityValue">5 м/с</p>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Үдеу (a):</label>
+                                <input type="range" class="form-range" id="accelerationSlider" min="-5" max="5" step="0.5" value="2">
+                                <p id="accelerationValue">2 м/с²</p>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Уақыт аралығы (t):</label>
+                                <input type="range" class="form-range" id="timeRangeSlider" min="1" max="20" step="1" value="10">
+                                <p id="timeRangeValue">10 секунд</p>
+                            </div>
+                            
+                            <div class="alert alert-info mt-4">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Графиктер туралы:</h6>
+                                <ul class="mb-0">
+                                    <li>Жылдамдық графигіндегі көлбеулік - үдеу</li>
+                                    <li>График астындағы аудан - жүрілген жол</li>
+                                    <li>Көлденең сызық - бірқалыпты қозғалыс</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Қолданыс бөлімі -->
+        <section class="mb-5">
+            <div class="card border-0 shadow">
+                <div class="card-header bg-secondary text-white">
+                    <h3><i class="fas fa-lightbulb me-2"></i>Күнделікті өмірдегі қолданысы</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Қозғалыс қауіпсіздігі">
+                                <div class="card-body">
+                                    <h5 class="card-title">Қозғалыс қауіпсіздігі</h5>
+                                    <p class="card-text">Тормоз жолының есебі кинематика заңдарына негізделген. Жүргізушілердің реакция уақыты мен машинаның тоқтау қашықтығы қозғалыс физикасымен есептеледі.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <img src="https://images.unsplash.com/photo-1543351611-58f69d7c1781?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Спорт">
+                                <div class="card-body">
+                                    <h5 class="card-title">Спорт</h5>
+                                    <p class="card-text">Атлеттердің қозғалысын талдау және оңтайландыру. Мысалы, жүгірушілердің старттағы үдеуі, секірушілердің траекториясы кинематика арқылы зерттеледі.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Ғарыш">
+                                <div class="card-body">
+                                    <h5 class="card-title">Ғарыштық ұшулар</h5>
+                                    <p class="card-text">Ұшу аппараттарының траекториясын есептеу. Ғарышқа ұшқан ракеталардың орбитаға шығу жолдары кинематика мен динамика заңдары бойынша есептеледі.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Қосымша материалдар -->
+        <section>
+            <div class="card border-0 shadow">
+                <div class="card-header bg-dark text-white">
+                    <h3><i class="fas fa-book-reader me-2"></i>Қосымша әдебиеттер</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <h5><i class="fas fa-book me-2 text-primary"></i>Оқулықтар:</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-2 me-auto">
+                                            <div class="fw-bold">Физика. 10-сынып</div>
+                                            Ә.Бекбаев
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill">PDF</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-2 me-auto">
+                                            <div class="fw-bold">Физика есептер жинағы</div>
+                                            Қ.Құрманбаев
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill">PDF</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-2 me-auto">
+                                            <div class="fw-bold">Кинематика негіздері</div>
+                                            Ж.Смағұлов
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill">PDF</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <h5><i class="fas fa-link me-2 text-success"></i>Пайдалы сілтемелер:</h5>
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1">Кинематика бойынша онлайн курс</h6>
+                                            <small class="text-muted">Khan Academy</small>
+                                        </div>
+                                        <p class="mb-1 small text-muted">Видео сабақтар және интерактивті тапсырмалар</p>
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1">Физикалық анимациялар</h6>
+                                            <small class="text-muted">PhET Simulations</small>
+                                        </div>
+                                        <p class="mb-1 small text-muted">Қозғалыс процестерін визуалды түрде көру</p>
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1">Физика есептерінің жинағы</h6>
+                                            <small class="text-muted">Физика порталы</small>
+                                        </div>
+                                        <p class="mb-1 small text-muted">Шешімдерімен 100-ден астам есеп</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="#" class="btn btn-primary me-2">
+                            <i class="fas fa-download me-1"></i>Барлық материалдар
+                        </a>
+                        <a href="#" class="btn btn-outline-success">
+                            <i class="fas fa-graduation-cap me-1"></i>Интерактивті оқулық
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Футер -->
+    <footer class="bg-light py-4 mt-5">
+        <div class="container text-center">
+            <p class="mb-2">© 2023 Физика порталы. Барлық құқықтар қорғалған.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="#" class="text-decoration-none"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-decoration-none"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-decoration-none"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-decoration-none"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS, Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        // Тіл ауыстыру
+        document.querySelector('.language-switcher').addEventListener('click', function() {
+            const languageText = document.getElementById('languageText');
+            if (languageText.textContent === 'Қаз') {
+                languageText.textContent = 'Рус';
+                // Мұнда тілді ауыстыру функциясын қосу керек
+            } else {
+                languageText.textContent = 'Қаз';
+            }
+        });
+
+        // Графиктерді баптау
+        let velocityChart, distanceChart;
+        
+        function initCharts() {
+            const velocityCtx = document.getElementById('velocityTimeGraph').getContext('2d');
+            const distanceCtx = document.getElementById('distanceTimeGraph').getContext('2d');
+            
+            const initialVelocity = parseInt(document.getElementById('initialVelocitySlider').value);
+            const acceleration = parseFloat(document.getElementById('accelerationSlider').value);
+            const timeRange = parseInt(document.getElementById('timeRangeSlider').value);
+            
+            const labels = Array.from({length: timeRange + 1}, (_, i) => i);
+            const velocityData = Array.from({length: timeRange + 1}, (_, i) => initialVelocity + acceleration * i);
+            const distanceData = Array.from({length: timeRange + 1}, (_, i) => 
+                initialVelocity * i + 0.5 * acceleration * i * i
+            );
+            
+            velocityChart = new Chart(velocityCtx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Жылдамдық (м/с)',
+                        data: velocityData,
+                        borderColor: 'rgb(75, 192, 192)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                        borderWidth: 2,
+                        tension: 0.1,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Жылдамдықтың уақытқа тәуелділігі'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Жылдамдық: ${context.parsed.y} м/с`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Жылдамдық (м/с)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Уақыт (с)'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            distanceChart = new Chart(distanceCtx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Жол (м)',
+                        data: distanceData,
+                        borderColor: 'rgb(54, 162, 235)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.1)',
+                        borderWidth: 2,
+                        tension: 0.1,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Жүрілген жолдың уақытқа тәуелділігі'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Жол: ${context.parsed.y} м`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Жол (м)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Уақыт (с)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Слайдерлардың өзгеруін бақылау
+        document.getElementById('initialVelocitySlider').addEventListener('input', function() {
+            document.getElementById('initialVelocityValue').textContent = `${this.value} м/с`;
+            updateCharts();
+        });
+        
+        document.getElementById('accelerationSlider').addEventListener('input', function() {
+            document.getElementById('accelerationValue').textContent = `${this.value} м/с²`;
+            updateCharts();
+        });
+        
+        document.getElementById('timeRangeSlider').addEventListener('input', function() {
+            document.getElementById('timeRangeValue').textContent = `${this.value} секунд`;
+            updateCharts();
+        });
+        
+        function updateCharts() {
+            const initialVelocity = parseInt(document.getElementById('initialVelocitySlider').value);
+            const acceleration = parseFloat(document.getElementById('accelerationSlider').value);
+            const timeRange = parseInt(document.getElementById('timeRangeSlider').value);
+            
+            const labels = Array.from({length: timeRange + 1}, (_, i) => i);
+            const velocityData = Array.from({length: timeRange + 1}, (_, i) => initialVelocity + acceleration * i);
+            const distanceData = Array.from({length: timeRange + 1}, (_, i) => 
+                initialVelocity * i + 0.5 * acceleration * i * i
+            );
+            
+            velocityChart.data.labels = labels;
+            velocityChart.data.datasets[0].data = velocityData;
+            velocityChart.update();
+            
+            distanceChart.data.labels = labels;
+            distanceChart.data.datasets[0].data = distanceData;
+            distanceChart.update();
+        }
+        
+        // Есептерді тексеру функциялары
+        function checkSolution(problemNumber) {}
+            if (problemNumber === 1) {
+                const userAnswer = parseFloat(document.getElementById('finalVelocity').value);
+                if (userAnswer === 25) {
+                    showAlert('Дұрыс! Құттықтаймын!', 'success');
+                } else {
+                    showAlert('Қате! Қайта ойланып көріңіз.', 'danger');
+                }
+            } else if (problemNumber === 2) {   
+                const userAnswer = parseFloat(document.getElementById('brakingDistance').value);
+                if (Math.abs(userAnswer - 40) < 0.1) {
+                    showAlert('Дұрыс! Автокөлік 40 метрден кейін тоқтайды.', 'success');
+                } else {
+                    showAlert ('Қате! Қайта ойланып көріңіз.', 'danger');
+                } }
+                </script>
+</body>
+</html>
